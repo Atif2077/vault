@@ -1,0 +1,47 @@
+{% extends 'chat/layout.html' %}
+
+{% block body %}
+<button style="margin: auto; margin-top: 20px; margin-bottom: 20px" id="notes_button" class="btn btn-primary">Add Notes</button>
+<div  id="notes" style="margin: auto; width: 70%">
+    <form action="{% url 'subjects' %}" method="post">
+        {% csrf_token %}
+        <div style="margin-top: 20px" class="form-group">
+            <label for="formGroupExampleInput">Subject:</label>
+            <input name="subject_name" type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the Subject">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Given By:</label>
+            <input type="text" name="student" class="form-control" id="formGroupExampleInput2" placeholder="Notes By:">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Description:</label>
+            <input type="text" name="description" class="form-control" id="formGroupExampleInput2" placeholder="Description:">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Link:</label>
+            <input type="text" name="link" class="form-control" id="formGroupExampleInput2" placeholder="Link of PDF">
+        </div>
+        <button style="margin-bottom: 40px" type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
+{% for data in b %}
+    <div class="assignment_box">
+        <h3 style="margin: 10px">{{data.subject_name}}</h3>
+        <p style="font-style: sans-serif; margin: 10px">Given By: {{data.student}}</p>
+        <p style="margin: 10px">Description: {{data.description}}</p>
+        <a style="margin: 18px" class="btn btn-info" type="button" href="{{data.link}}">View Notes</a>
+    </div>
+{% endfor %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('#notes').style.display = 'none';
+        document.querySelector('#notes_button').style.display = 'block';
+        document.querySelector('#notes_button').addEventListener('click', () => load_notes());
+    })
+    function load_notes() {
+        document.querySelector('#notes_button').style.display = 'none';
+        document.querySelector('#notes').style.display = 'block';
+    }
+    ;
+</script>
+{% endblock %}

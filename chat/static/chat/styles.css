@@ -1,0 +1,55 @@
+.book_box {
+    overflow: hidden;
+    border-left: 3px solid brown;
+    margin: 50px;
+    height: auto
+}
+
+.assignment_box {
+    margin: auto;
+    margin-bottom: 20px;
+    width: 70%;
+    height: 20%;
+    border: 2px purple;
+    border-style: ridge;
+    border-radius: 30px;
+    padding: 10px
+}
+
+.card {
+    margin: 20px;
+}
+
+.card-img-top {
+    width: 180px;
+    height: 278px;
+    
+}
+
+#chat-log {
+    margin: auto;
+    overflow-y: scroll;
+    height:400px;
+    width: 80%;
+    background: #625959; 
+    margin-top: 40px; 
+    color: white; 
+    font-family: sans-serif;
+    border-radius: 30px;
+    padding: 30px;
+    scroll-behavior: smooth;
+}
+
+.chat-input {
+    margin: auto;
+    width: 80%;
+    margin-top: 20px;
+    align-items: center;
+}
+
+#footer {
+    display: table;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
