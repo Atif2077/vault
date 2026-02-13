@@ -2,7 +2,18 @@
     overflow: hidden;
     border-left: 3px solid brown;
     margin: 50px;
-    height: auto
+    height: auto;
+
+    /* ✨ Glass effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border-radius: 25px; /* more curvy */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+}
+
+.book_box:hover {
+    transform: scale(1.02);
 }
 
 .assignment_box {
@@ -12,18 +23,35 @@
     height: 20%;
     border: 2px purple;
     border-style: ridge;
-    border-radius: 30px;
-    padding: 10px
+    border-radius: 40px; /* more curvy */
+    padding: 10px;
+
+    /* ✨ Glass effect */
+    background: rgba(128, 0, 128, 0.1); /* semi-transparent purple tint */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.assignment_box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
 }
 
 .card {
     margin: 20px;
+
+    /* subtle glass card effect */
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .card-img-top {
     width: 180px;
     height: 278px;
-    
+    border-radius: 20px; /* subtle rounding for images */
 }
 
 #chat-log {
@@ -31,13 +59,15 @@
     overflow-y: scroll;
     height:400px;
     width: 80%;
-    background: #625959; 
+    background: rgba(98, 89, 89, 0.25); /* semi-transparent glass effect */
+    backdrop-filter: blur(10px);
     margin-top: 40px; 
     color: white; 
     font-family: sans-serif;
-    border-radius: 30px;
+    border-radius: 40px; /* curvier */
     padding: 30px;
     scroll-behavior: smooth;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
 .chat-input {
@@ -45,6 +75,12 @@
     width: 80%;
     margin-top: 20px;
     align-items: center;
+
+    /* subtle glass input wrapper effect */
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 30px;
+    padding: 10px 15px;
 }
 
 #footer {
@@ -52,4 +88,8 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    background: rgba(0,0,0,0.3); /* subtle footer glass */
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    padding: 10px 0;
 }
