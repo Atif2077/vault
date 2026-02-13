@@ -141,3 +141,8 @@ AUTH_USER_MODEL = 'chat.User'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://vault-tcor.onrender.com",
+]
+
