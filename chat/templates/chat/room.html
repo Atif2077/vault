@@ -1,87 +1,81 @@
 {% extends 'chat/layout.html' %}
 
 {% block body %}
-
-
 <body>
     <div id="chat-log" cols="100" rows="20">
-    {% for data in data1 %}
-    <h6 style="margin: 5px; border: 2px solid grey; border-radius: 5px; padding: 5px; overflow: hidden">{{data.data}}<small style="float: right"><small>{{data.time}}</small></small></h6>
-    {% endfor %}
+        {% for data in data1 %}
+        <h6 style="margin: 5px; border: 2px solid grey; border-radius: 5px; padding: 5px; overflow: hidden">
+            {{data.data}}
+            <small style="float: right"><small>{{data.time}}</small></small>
+        </h6>
+        {% endfor %}
     </div>
+
     <div class="input-group mb-3" style="width: 80%; align-items: center; margin: auto; margin-top: 20px">
-    <input id="chat-message-input" class="form-control" type="text" size="100"><br>
-    <button id="chat-message-submit" style="float: left; margin-left: 2%;" class="btn btn-primary" type="submit" value="Send">Send</button>
+        <input id="chat-message-input" class="form-control" type="text" size="100">
+        <button id="chat-message-submit" style="float: left; margin-left: 2%;" class="btn btn-primary" type="submit">Send</button>
     </div>
+
     {{ room_name|json_script:"room-name" }}
+
     <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
+        // 🔹 Dynamic WS/WSS URL
+        const ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
         const chatSocket = new WebSocket(
-            'ws://'
-            + window.location.host
-            + '/ws/chat/'
-            + roomName
-            + '/'
+            ws_scheme + '://' + window.location.host + '/ws/chat/' + roomName + '/'
         );
 
+        // Scroll to last message
         document.addEventListener('DOMContentLoaded', function () {
-            let divs = document.querySelectorAll('small');
-            let target = null;
+            const chatLog = document.getElementById('chat-log');
+            chatLog.scrollTop = chatLog.scrollHeight;
+        });
 
-            divs.forEach(div => {
-                if (div.innerHTML.includes("{{user.last_login}}")) {
-                    target = div;
-                }
-                else if (div.innerHTML < "{{user.last_login}}"){
-                    target = div;
-                }
-            });
-            
-            var topPos = target.offsetTop;
-            document.getElementById('chat-log').scrollTop = topPos;
-        })
-
+        // Receive messages
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            var div = document.createElement("h6")
-            div.innerHTML = data.message
-            console.log(div.innerHTML)
-            div.style.margin = "5px"
+            const div = document.createElement("h6");
+            div.innerHTML = data.message;
+            div.style.margin = "5px";
             div.style.borderStyle = 'solid';
             div.style.borderColor = 'grey';
             div.style.borderWidth = '2px';
             div.style.borderRadius = '5px';
-            div.style.padding = "5px"
-            
-            
-            var chat_log = document.querySelector('#chat-log');
-            chat_log.appendChild(div)
-            chat_log.scrollTop = chat_log.scrollHeight;
+            div.style.padding = "5px";
+
+            const chatLog = document.querySelector('#chat-log');
+            chatLog.appendChild(div);
+            chatLog.scrollTop = chatLog.scrollHeight;
         };
 
         chatSocket.onclose = function(e) {
             console.error('Chat socket closed unexpectedly');
         };
 
-        document.querySelector('#chat-message-input').focus();
-        document.querySelector('#chat-message-input').onkeyup = function(e) {
-            if (e.key === 'Enter') {  // enter, return
+        // Send message on Enter
+        const messageInput = document.querySelector('#chat-message-input');
+        messageInput.focus();
+        messageInput.onkeyup = function(e) {
+            if (e.key === 'Enter') {
                 document.querySelector('#chat-message-submit').click();
             }
         };
 
+        // Send message on button click
         document.querySelector('#chat-message-submit').onclick = function(e) {
-            const messageInputDom = document.querySelector('#chat-message-input');
-            const message = messageInputDom.value;
-            const name = "{{user.username}}"
+            const message = messageInput.value;
+            const name = "{{user.username}}";
+
+            if (message.trim() === "") return; // ignore empty messages
+
             chatSocket.send(JSON.stringify({
                 'message': `${name}:: ${message}`,
                 'name': name
             }));
-            messageInputDom.value = '';
+            messageInput.value = '';
         };
     </script>
 </body>
-
 {% endblock %}
