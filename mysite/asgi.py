@@ -1,30 +1,24 @@
 import os
-import django
-from django.core.asgi import get_asgi_application
-from channels.auth import AuthMiddlewareStack
+
+# 1️⃣ Set settings module FIRST
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")  # replace mysite with your project name
+
 from channels.routing import ProtocolTypeRouter, URLRouter
-from django.core.management import call_command
-
-from chat import routing  # import your chat routing.py
-
-# 1️⃣ Set Django settings
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
+from django.core.asgi import get_asgi_application
+import django
 
 # 2️⃣ Setup Django
 django.setup()
 
-# 3️⃣ Run migrations safely (optional)
-try:
-    call_command('migrate', interactive=False)
-except Exception as e:
-    print("Migration error:", e)
+# 3️⃣ Now imports that use Django (like routing or consumers)
+from chat.routing import websocket_urlpatterns
+from channels.auth import AuthMiddlewareStack
 
-# 4️⃣ ASGI application
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
     "websocket": AuthMiddlewareStack(
         URLRouter(
-            routing.websocket_urlpatterns
+            websocket_urlpatterns
         )
     ),
 })
