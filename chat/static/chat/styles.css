@@ -59,15 +59,15 @@
     overflow-y: scroll;
     height:400px;
     width: 80%;
-    background: rgba(98, 89, 89, 0.25); /* semi-transparent glass effect */
+    background: rgba(198, 192, 192, 0.25); /* semi-transparent glass effect */
     backdrop-filter: blur(10px);
     margin-top: 40px; 
-    color: white; 
+    color: rgb(4, 65, 21); 
     font-family: sans-serif;
     border-radius: 40px; /* curvier */
     padding: 30px;
     scroll-behavior: smooth;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 20px rgba(207, 191, 191, 0.293);
 }
 
 .chat-input {
@@ -90,7 +90,6 @@
     margin-right: auto;
     margin-top: 50px; /* add spacing above footer */
     padding: 20px 0; /* more vertical spacing inside footer */
-    background: #222; /* darker footer for contrast */
-    color: #f8f9fa; /* readable text */
+    color: #00060c; /* readable text */
     border-radius: 15px 15px 0 0; /* soft top corners */
 }
