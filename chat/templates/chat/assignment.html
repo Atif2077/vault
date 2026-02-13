@@ -1,0 +1,30 @@
+{% extends 'chat/layout.html' %}
+
+{% block body %}
+<div style="margin: auto; width: 70%">
+    <form action="{% url 'assignment' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="formGroupExampleInput">Assignment</label>
+            <input name="assignment_name" type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter the topic">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Given By:</label>
+            <input type="text" name="prof" class="form-control" id="formGroupExampleInput2" placeholder="Professor:">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Deadline:</label>
+            <input type="date" name="deadline" class="form-control" id="formGroupExampleInput2" placeholder="Deadline">
+        </div>
+        <button style="margin-bottom: 40px" type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
+{% for data in a %}
+    <div class="assignment_box">
+        <h3 style="margin: 10px">{{data.name}}</h3>
+        <p style="font-style: sans-serif; margin: 10px">Given By: {{data.prof}}</p>
+        <small><p style="margin: 10px">Deadline: {{data.time}}</p></small>
+    </div>
+{% endfor %}
+
+{% endblock %}

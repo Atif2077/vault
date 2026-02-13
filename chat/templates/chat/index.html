@@ -1,0 +1,45 @@
+{% extends 'chat/layout.html' %}
+
+{% block body %}
+<body>
+    <div style="margin-top: 5%">
+        <div style="overflow: hidden; width: 87%; margin: auto">
+            <div class="card" style="width: 18rem; float: left; ">
+                <img class="card-img-top" src="https://th.bing.com/th/id/OIP.LTdIof_5WCgwBDM0W0unqgHaHa?rs=1&pid=ImgDetMain" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Books</h5>
+                    <p class="card-text">This will lead you to collection of some of the required books which are updated by us and read by us.</p>
+                    <a href="{% url 'books' %}" class="btn btn-primary">Books</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem; float: left">
+                <img class="card-img-top" src="https://www.pngmart.com/files/16/Chat-Bubble-PNG-Pic.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Chat</h5>
+                    <p class="card-text">You can interact with your friends here and get help on any of the assignments.</p>
+                    <a href="{% url 'room' %}" class="btn btn-primary">Chat Here</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem; float: left">
+                <img class="card-img-top" src="https://th.bing.com/th/id/OIP.L6M1zAJni2HqoCC0jm1U0AHaE8?rs=1&pid=ImgDetMain" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Assignment</h5>
+                    <p class="card-text">You can check all your assignments and the deadline of that assignment.</p>
+                    <a href="{% url 'assignment' %}" class="btn btn-primary">Assignments</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem; float: left; margin-right: 0px">
+                <img class="card-img-top" src="https://1.bp.blogspot.com/-q4pvn-WdP3M/YFDahUwwq8I/AAAAAAAAARM/pceoYbhk5Xc3onXnCxyQ3Qd9u3rWsZgzACNcBGAsYHQ/s16000-rw/Biotechnology-subjects-in-Biotechnology-courses.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Notes</h5>
+                    <p class="card-text">You can get the notes of your subjects from your classmates & can upload your notes here.</p>
+                    <a href="{% url 'subjects' %}" class="btn btn-primary">Notes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    </script>
+
+</body>
+{% endblock %}

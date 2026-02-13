@@ -1,0 +1,31 @@
+{% extends 'chat/layout.html' %}
+
+{% block body %}
+<div>
+    <form action="{% url 'books' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3" style="width: 80%; align-items: center; margin: auto">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
+            </div>
+            <input type="text" name="search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <button style="margin: 20px" type="submit" class="btn btn-primary">Enter</button>
+            <a style="" type="button" href="{% url 'book_update' %}" class="btn btn-primary">Add a Book</a>
+        </div>
+    </form>
+    
+    {% for book in books %}
+    <div class="book_box">
+        <img style="float: left; margin: 20px; width: 300px; height: 250px" src={{book.image}} alt="image of book"/>
+        <div style="float: left; margin: 60px">
+            <h3>{{book.title}}</h3>
+            <pre>Author: {{book.author}}</pre>
+            <p style="font-family: sans-serif">Updated on: {{book.time}}</p>
+            <a class="btn btn-info" type="button" href="{{book.link}}">View Book</a>
+        </div>
+    </div>
+    {% endfor %}
+
+
+</div>
+{% endblock %}
